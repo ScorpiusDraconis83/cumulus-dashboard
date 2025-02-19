@@ -37,6 +37,7 @@ const CommonConfig = {
       stream: require.resolve('stream-browserify'),
       crypto: require.resolve('crypto-browserify'),
       util: require.resolve('util'),
+      vm: require.resolve('vm-browserify'),
     },
   },
   module: {
@@ -126,6 +127,14 @@ const CommonConfig = {
             loader: 'font-awesome-loader',
           },
         ],
+      },
+      {
+        test: /\.m?js$/,
+        include: /node_modules/,
+        type: 'javascript/auto',
+        resolve: {
+          fullySpecified: false
+        }
       },
     ],
   },
