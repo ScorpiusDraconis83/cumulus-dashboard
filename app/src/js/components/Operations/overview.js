@@ -14,7 +14,6 @@ import {
   listCollections,
   listOperations,
   listWorkflows,
-  refreshCumulusDbConnection,
 } from '../../actions';
 import { tally } from '../../utils/format';
 import List from '../Table/Table';
@@ -34,7 +33,6 @@ class OperationOverview extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(refreshCumulusDbConnection());
     this.queryMeta();
     this.props.dispatch(getCumulusInstanceMetadata());
   }
@@ -109,7 +107,7 @@ class OperationOverview extends React.Component {
             tableColumns={tableColumns}
             query={this.generateQuery()}
             rowId="id"
-            initialSortId="createdAt"
+            initialSortId="updatedAt"
             filterAction={filterOperations}
             filterClear={clearOperationsFilter}
             tableId="operations"

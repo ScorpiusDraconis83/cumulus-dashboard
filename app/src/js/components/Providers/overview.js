@@ -10,7 +10,6 @@ import {
   getCount,
   filterProviders,
   clearProvidersFilter,
-  refreshCumulusDbConnection,
 } from '../../actions';
 import { lastUpdated } from '../../utils/format';
 import { tableColumns } from '../../utils/table-config/providers';
@@ -25,7 +24,6 @@ class ProvidersOverview extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(refreshCumulusDbConnection());
     this.queryStats();
   }
 
@@ -100,7 +98,7 @@ class ProvidersOverview extends React.Component {
             query={this.generateQuery()}
             bulkActions={bulkActions}
             rowId="name"
-            initialSortId="timestamp"
+            initialSortId="updatedAt"
             filterAction={filterProviders}
             filterClear={clearProvidersFilter}
             tableId="providers"

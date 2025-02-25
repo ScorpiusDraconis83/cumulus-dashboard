@@ -9,7 +9,6 @@ import {
   clearRulesSearch,
   filterRules,
   clearRulesFilter,
-  refreshCumulusDbConnection,
 } from '../../actions';
 import { lastUpdated, tally } from '../../utils/format';
 import List from '../Table/Table';
@@ -35,7 +34,6 @@ class RulesOverview extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(refreshCumulusDbConnection());
     this.props.dispatch(listRules);
   }
 
@@ -79,7 +77,7 @@ class RulesOverview extends React.Component {
             action={listRules}
             tableColumns={tableColumns}
             query={{ ...queryParams }}
-            initialSortId="timestamp"
+            initialSortId="updatedAt"
             bulkActions={this.generateBulkActions()}
             rowId="name"
             filterAction={filterRules}

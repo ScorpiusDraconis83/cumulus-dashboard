@@ -1,7 +1,7 @@
-FROM node:16.19.0 as build
+FROM node:20.12.2 as build
 WORKDIR /cumulus-dashboard
 COPY package.json package-lock.json ./
-RUN npm install --no-optional
+RUN npm ci --legacy-peer-deps --no-optional 
 
 ARG APIROOT
 ARG AUTH_METHOD

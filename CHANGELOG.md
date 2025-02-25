@@ -7,14 +7,67 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-This version of the dashboard requires Cumulus API >= v18.2.0
+- **CUMULUS-4008**
+  - Updated the Dockerfile with improved NPM install command to prevent error messages.
+
+## [v13.0.0] - 2024-02-19
+This version of the dashboard requires Cumulus API >= v20.0.0
 
 ### Changed
 
-- **CUMULUS-3619**
-    - Added Accessibility link to footer
-    - Modified unit tests to accomodate new changes.
+- **CUMULUS-3862**
+  - Updated documentation to account for short term React upgrade version dependency issues that arise using npm.
 
+- **GitHub Issue 1162**
+  - Added documentation for beginners starting from scratch.
+
+- **CUMULUS-3861**
+  - Updated React 17 to React 18  
+  - Removed test script references to Enzyme and replaced them with React compliant testing components
+
+- **CUMULUS-3860/3870**
+  - Updated React and dependencies
+  - react 17.0.2 ⇒ 18.3.1
+- **CUMULUS-3748**
+  - Removed reconciliationReports aggregate stats call from Granules Page
+- **CUMULUS-3821**
+  - Removed fake-granuleid-refresh-connection/refreshCumulusDbConnection
+- **CUMULUS-3859**
+  - Removed ElasticSearch from localAPI docker-compose files
+  - Updated the dashboard to use alpha version `@cumulus/api@19.2.0-alpha.1` and
+    `@cumulus/aws-client@19.2.0-alpha.1`
+  - Updated the integration tests to work with updated API
+  - Updated packages to address [CVE-2024-21538] (https://github.com/advisories/GHSA-3xgq-45jj-v275)
+- **CUMULUS-3870**
+  - Remove launchpad security key information from cypress fixture for `valid-execution.json`
+  - Add placeholders for security information with `fakePassword` and `userName`
+- **CUMULUS-3892**
+  - Updated Metrics Overview page executions and rules query to only get count from the past 24 hours
+- **CUMULUS-3990**
+  - Upgraded localstack from 3.0.0 to 4.0.3
+- **Cypress Upgrade**
+  - Upgraded cypress from 8.7.0 to 9.7.0 to work with updated @cumulus/api@20.0.0 and
+    @cumulus/aws-client@20.0.0 packages
+  - Updated localAPI docker-compose-cypress.yml to use cypress 9.7.0
+
+### Fixed
+
+- **CUMULUS-3905**
+  - Fixed npm audit issues with `body-parser` and `path-to-regexp`
+
+## [v12.2.0] - 2024-09-04
+
+This version of the dashboard requires Cumulus API >= v18.4.0
+
+### Changed
+
+- **CUMULUS-3805**
+  - Updated collections to sort by timestamp instead of duration
+  - Changed the initialSortField of tables using createdAt to updatedAt
+  - Removed the duration column from the Collections table
+- **CUMULUS-3619**
+  - Added Accessibility link to footer
+  - Modified unit tests to accomodate new changes.
 - **CUMULUS-3502**
   - Upgraded localstack to v3.0.0
   - Bumped node version from 14.19.1 to 16.19.0 to match Core
@@ -23,6 +76,24 @@ This version of the dashboard requires Cumulus API >= v18.2.0
     `@cumulus/aws-client@18.2.0-alpha.0` to work with localstack v3.0.0
 - **Snyk Security Fix**
   - Upgraded axios from 1.6.0 to 1.6.8
+- **CUMULUS-3810**
+  - converted the following files from class to functional components: home.js, 
+  header.js, index.js, oauth.js, app.js, and 404.js
+- **CUMULUS-2668**
+  - Refactored DeleteCollectionModal and BatchAsyncCommands from class to function components.
+  - Modified unit tests to accomodate new changes.
+- **CUMULUS-2356**
+  - Removed gitc localization
+  - Allowlisted braces, ws, and fast-xml-parser
+- **CUMULUS-3706**
+  - Bumped node version from 16.19.0 to 20.12.2 to match Core
+  - Updated the dashboard to use `@cumulus/api@18.4.0` and `@cumulus/aws-client@18.4.0`.
+  - Upgraded postgres image to postgres:13.9-alpine
+
+### Fixed
+
+- **CUMULUS-3855**
+  - Fixed to show API indicator and tooltip details
 
 ## [v12.1.0] - 2023-10-27
 
@@ -1377,7 +1448,9 @@ Fix for serving the dashboard through the Cumulus API.
 ### Added
 
 - Versioning and changelog [CUMULUS-197] by @kkelly51
-  [Unreleased]: https://github.com/nasa/cumulus-dashboard/compare/v12.1.0...HEAD
+  [Unreleased]: https://github.com/nasa/cumulus-dashboard/compare/v13.0.0...HEAD
+  [v13.0.0]: https://github.com/nasa/cumulus-dashboard/compare/v12.2.0...v13.0.0
+  [v12.2.0]: https://github.com/nasa/cumulus-dashboard/compare/v12.1.0...v12.2.0
   [v12.1.0]: https://github.com/nasa/cumulus-dashboard/compare/v12.0.2...v12.1.0
   [v12.0.2]: https://github.com/nasa/cumulus-dashboard/compare/v12.0.1...v12.0.2
   [v12.0.1]: https://github.com/nasa/cumulus-dashboard/compare/v12.0.0...v12.0.1

@@ -1,18 +1,14 @@
 'use strict';
 
 import test from 'ava';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { render, fireEvent } from '@testing-library/react'
 import React from 'react';
-import { configure, shallow } from 'enzyme';
 
 import { BatchCommand } from '../../../app/src/js/components/BatchAsyncCommands/BatchAsyncCommands';
 
-configure({ adapter: new Adapter() });
-
-test('collect multiple errors', function (t) {
+test.cb('collect multiple errors', function (t) {
   const noop = () => {};
 
-  return new Promise((resolve, reject) => {
     const selected = [
       '0-error',
       '1-pass',
@@ -24,7 +20,7 @@ test('collect multiple errors', function (t) {
     const done = () => {
       count++;
       if (count === 2) {
-        resolve();
+        t.end();
       }
     };
 
@@ -51,8 +47,12 @@ test('collect multiple errors', function (t) {
       }
 
       process.nextTick(() => {
-        command.setProps(item);
+        command.update();
       });
+    };
+
+    const cleanup = () => {
+      console.log('Cleanup called');
     };
 
     const item = {
@@ -62,7 +62,7 @@ test('collect multiple errors', function (t) {
       confirm: noop
     };
 
-    const command = shallow(
+    const { container } = render(
       <BatchCommand
         key={item.text}
         dispatch={noop}
@@ -73,12 +73,12 @@ test('collect multiple errors', function (t) {
         onSuccess={onSuccess}
         onError={onError}
         selected={selected}
+        cleanup={cleanup}
       />
     );
 
-    command.instance().start();
+    fireEvent.click(container.querySelector('.button__group'));
     setTimeout(()=> {
-      command.instance().cleanup();
-    }, 1000)
+      t.end();
+    }, 1000);
   });
-});

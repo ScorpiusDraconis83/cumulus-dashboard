@@ -11,7 +11,6 @@ import {
   listExecutions,
   listWorkflows,
   getOptionsCollectionName,
-  refreshCumulusDbConnection,
 } from '../../actions';
 import { workflowOptions as workflowSelectOptions } from '../../selectors';
 import { tally, lastUpdated } from '../../utils/format';
@@ -50,7 +49,6 @@ const ExecutionOverview = ({
   const tableColumnsArray = tableColumns({ dispatch });
 
   useEffect(() => {
-    dispatch(refreshCumulusDbConnection());
     dispatch(listWorkflows());
   }, [dispatch]);
 
@@ -81,7 +79,7 @@ const ExecutionOverview = ({
           tableColumns={tableColumnsArray}
           query={{ ...queryParams }}
           rowId="name"
-          initialSortId="createdAt"
+          initialSortId="updatedAt"
           filterAction={filterExecutions}
           filterClear={clearExecutionsFilter}
           tableId="executions"
